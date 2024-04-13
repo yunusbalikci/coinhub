@@ -2,8 +2,14 @@ import React from 'react'
 import Header from '../components/Header'
 import { motion } from "framer-motion";
 import Market from '../components/Market';
-
-
+import { useScroll } from "framer-motion"
+import Card from '../components/Card';
+import Work from '../components/Work';
+import Desc from '../components/Desc';
+import {  useEffect } from 'react';
+import {  useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import Footer from '../components/Footer';
 
 const data =[
     {
@@ -56,26 +62,73 @@ const data =[
     },
 
   ]
+
   function Home() {
+    const { scrollYProgress } = useScroll()
+    const controls = useAnimation();
+    const { ref, inView } = useInView();
+
+    useEffect(() => {
+        if (inView) {
+          controls.start('visible');
+        } else {
+          controls.start('hidden');
+        }
+      }, [controls, inView]);
+
     return (
-      <div className='bg-gradient-to-b from-slate-600 to-slate-900'>
+      <div className='bg-gray-900 h-full'>
         <Header />
         <div>
-          <motion.h1
-          initial={{ opacity: 0, translateY: -50 }}
-          animate={{ opacity: 1, translateY: 0 }}
-          transition={{ duration: 0.5 }}
-          className='bg-gradient-to-r from-sky-700 via-violet-600 to-purple-900 bg-clip-text text-transparent font-space-grotesk  font-bold text-center uppercase text-8xl mt-20'>Welcome to Coin Hub</motion.h1>
-          <motion.h2
-          initial={{ opacity: 0, translateY: -50 }}
-          animate={{ opacity: 1, translateY: 0 }}
-          transition={{ duration: 0.5 }}
-          className='text-white font-space-grotesk text-center text-5xl uppercase mt-10 pb-20'>Your favorite cryptocurrency tracker</motion.h2>
-          <div className='container flex flex-wrap mt-10 pb-2'>
+          <div className='grid grid-cols-2 container grid-rows-1 gap-2'>
+            <div>
+              <motion.h1
+              initial={{ opacity: 0, translateY: -50 }}
+              animate={{ opacity: 1, translateY: 0 }}
+              transition={{ duration: 0.5 }}
+              className='text-white mt-32 font-roboto mr-20 font-bold text-center uppercase text-6xl p-'>Buy & Sell Digital Assets In The Coin Hub</motion.h1>
+              <motion.h2
+              initial={{ opacity: 0, translateY: -50 }}
+              animate={{ opacity: 1, translateY: 0 }}
+              transition={{ duration: 0.5 }}
+              className='text-gray-300 text-lg font-roboto mt-4 p-1 '
+              >
+                The best place to buy and sell crypto. Securely buy, sell, and build your cryptocurrency portfolio. 
+              </motion.h2>
+              <motion.button
+              initial={{ opacity: 0, translateY: -50 }}
+              animate={{ opacity: 1, translateY: 0 }}
+              transition={{ duration: 0.5 }}
+              className='bg-gradient-to-r from-cyan-500 to-blue-500 hover:shadow-xl duration-200 text-white font-roboto font-bold text-lg p-4 rounded-full mt-8'
+              >
+                Get Started
+              </motion.button>
+              
+            </div>
+
+            <div>
+            <motion.img
+              initial={{ opacity: 0, translateY: -50 }}
+              animate={{ opacity: 1, translateY: 0 }}
+              transition={{ duration: 0.5 }}
+              src="https://kriptomat.io/wp-content/uploads/2021/12/blockchain.png" className='pl-10 mt-10' width={600} alt="" />
+            </div>
+            
+          </div>
+          <Card></Card>
+          <Work></Work>
+          <Desc></Desc>
+          <div className='bg-gray-800'>
+          <div className='list  container flex flex-wrap pt-20  pb-10'>
             {data.map((coin, i) => (
               <motion.div 
-              initial={{ opacity: 0, translateY: 50 }}
-              animate={{ opacity: 1, translateY: 0 }}
+              ref={ref}
+              initial="hidden"
+              animate={controls}
+              variants={{
+                visible: { opacity: 1, y: 0 },
+                hidden: { opacity: 0, y: 100 },
+              }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               key={i} className='container p-3 space-x-16 items-center justify-center mx-auto  w-60  pl-16'>
                 <a href={coin.link}>
@@ -101,9 +154,12 @@ const data =[
             ))}
             
           </div>
+          </div>
+          
         </div>
         <Market></Market>
-
+        <Footer></Footer>
+        
       </div>
     );
   }
