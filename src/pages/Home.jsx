@@ -64,7 +64,6 @@ const data =[
   ]
 
   function Home() {
-    const { scrollYProgress } = useScroll()
     const controls = useAnimation();
     const { ref, inView } = useInView();
 
@@ -85,12 +84,12 @@ const data =[
               <motion.h1
               initial={{ opacity: 0, translateY: -50 }}
               animate={{ opacity: 1, translateY: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 1 }}
               className='text-white mt-32 font-roboto mr-20 font-bold text-center uppercase text-6xl p-'>Buy & Sell Digital Assets In The Coin Hub</motion.h1>
               <motion.h2
               initial={{ opacity: 0, translateY: -50 }}
               animate={{ opacity: 1, translateY: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 1 }}
               className='text-gray-300 text-lg font-roboto mt-4 p-1 '
               >
                 The best place to buy and sell crypto. Securely buy, sell, and build your cryptocurrency portfolio. 
@@ -98,7 +97,7 @@ const data =[
               <motion.button
               initial={{ opacity: 0, translateY: -50 }}
               animate={{ opacity: 1, translateY: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 1 }}
               className='bg-gradient-to-r from-cyan-500 to-blue-500 hover:shadow-xl duration-200 text-white font-roboto font-bold text-lg p-4 rounded-full mt-8'
               >
                 Get Started
@@ -110,7 +109,7 @@ const data =[
             <motion.img
               initial={{ opacity: 0, translateY: -50 }}
               animate={{ opacity: 1, translateY: 0 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 1 }}
               src="https://kriptomat.io/wp-content/uploads/2021/12/blockchain.png" className='pl-10 mt-10' width={600} alt="" />
             </div>
             
@@ -159,6 +158,7 @@ const data =[
         </div>
         <Market></Market>
         <Footer></Footer>
+
         
       </div>
     );

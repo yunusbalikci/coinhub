@@ -58,7 +58,10 @@ function Footer() {
 
 
       </div>
-      <h3 className='text-center font-roboto text-white'>© 2022 Coinhub All Rights Reserved</h3>
+      <div className='flex items-center justify-center'>
+        <h3 className='text-center font-roboto text-white'>© 2022 Coinhub All Rights Reserved</h3><a className='text-center font-roboto text-blue-500 ml-1 underline' href="https://yunusbalikci.netlify.app/">YunusBlkc</a>
+
+      </div>
     </motion.div>
   )
 }

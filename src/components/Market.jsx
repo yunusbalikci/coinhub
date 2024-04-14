@@ -8,8 +8,9 @@ import { useInView } from 'react-intersection-observer';
 
 
 function Market() {
+  const [coins, setCoins] = useState([]);
   const controls = useAnimation();
-    const { ref, inView } = useInView();
+  const { ref, inView } = useInView();
 
     useEffect(() => {
         if (inView) {
@@ -19,25 +20,37 @@ function Market() {
         }
       }, [controls, inView]);
 
-
-    const [portfolio, setPortfolio] = useState([]);
-
-    useEffect(() => {
-      async function fetchExchangeRates() {
-        const assets = ['BTC', 'ETH', 'XRP', 'LTC', 'ADA', 'SOL', 'DOT', 'DOGE'];
-        const exchangeRates = {};
+      useEffect(() => {
+        const fetchData = async () => {
+          const options = {
+            method: 'GET',
+            url: 'https://coinranking1.p.rapidapi.com/coins',
+            params: {
+              referenceCurrencyUuid: 'yhjMzLPhuIDl',
+              timePeriod: '24h',
+              'tiers[0]': '1',
+              orderBy: 'marketCap',
+              orderDirection: 'desc',
+              limit: '10',
+              offset: '0'
+            },
+            headers: {
+              'X-RapidAPI-Key': '0b84405b6dmshf6c0eb56a7e9f99p1444ffjsn3ed18b438854',
+              'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
+            }
+          };
     
-        for (const asset of assets) {
-          const response = await axios.get(`https://rest.coinapi.io/v1/exchangerate/${asset}/USD?apikey=6942835F-BE27-4508-9181-DCBD79CA5461`);
-          exchangeRates[asset] = response.data.rate;
-          // İstekler arasında 1 saniye bekleyin
-          await new Promise(resolve => setTimeout(resolve, 3000));
-        }
+          try {
+            const response = await axios.request(options);
+            setCoins(response.data.data.coins);
+          } catch (error) {
+            console.error(error);
+          }
+        };
     
-        setPortfolio(exchangeRates);
-      }
-      fetchExchangeRates();
-    }, []);
+        fetchData();
+      }, []);
+    
     
 
   return (
@@ -53,22 +66,31 @@ function Market() {
       <div className='container pb-10'>
         <h1 className='text-white font-roboto font-bold text-5xl mt-4 pt-2'>Market Update</h1>
         <div className='flex font-roboto text-white p-3 text-lg justify-between border-b-2 font-bold mt-10 rounded-lg w-full'>
-            <h1>Coin</h1>
-            <h1>Price</h1>
+            <h1 className='w-64'>Name</h1>
+            <h1>Last Price</h1>
             <h1>24h Change</h1>
+            <h1>Last 7 Days</h1>
             <h1>Market Cap</h1>
         </div>
 
-        <div className='font-roboto text-white mt-10 justify-between w-full'>
-          {Object.entries(portfolio).map(([asset, exchangeRate]) => (
-            <div className='flex justify-between border-b-2' key={asset}>
-              <p className='ml-4 text-lg font-roboto font-bold'>{asset}</p>
-              <p>{exchangeRate}</p>
-              <img src="https://codewithsadee.github.io/cryptex/assets/images/chart-1.svg" alt="" />
-              <p>€880,423,640,582</p>
-              
+        <div className='font-roboto text-white  justify-between w-full'>
+
+          {coins.map((coin) => (
+          <motion.div
+          initial={{ opacity: 0, translateY: 50 }}
+          animate={{ opacity: 1, translateY: 0 }}
+          className='flex justify-between border-b-2 pt-4 hover:bg-gray-800 duration-200' key={coin.id}>
+            <div className='flex w-64'>
+              <img src={coin.iconUrl} className='w-8 mb-1 ' alt="" />
+              <p className='ml-4 text-lg font-roboto pt-1 font-bold'>{coin.name}</p>
+              <p className='font-roboto ml-4 mt-1 text-gray-400'>{coin.symbol}</p>
             </div>
-          ))}
+            <p className='font-roboto font-bold text-lg'>${(coin.price).substring(10,0)}</p>
+            {coin.change > 0 ? (<p className='font-roboto text-lg  text-green-500'>{coin.change}%</p>) : (<p className='font-roboto text-lg text-red-500'>{coin.change}%</p>)}
+            {coin.change > 0 ? (<img src='https://codewithsadee.github.io/cryptex/assets/images/chart-1.svg'></img>) : (<img src='https://codewithsadee.github.io/cryptex/assets/images/chart-2.svg'></img>)}
+            <p>{coin.marketCap}</p>
+          </motion.div>
+        ))}
         </div>
         
         <div>
