@@ -79,18 +79,19 @@ const data =[
       <div className='bg-gray-900 h-full'>
         <Header />
         <div>
-          <div className='grid grid-cols-2 container grid-rows-1 gap-2'>
+          <div className="container">
+          <div className='grid md:grid-cols-2 md:ml-0 container md:grid-rows-1 gap-2'>
             <div>
               <motion.h1
               initial={{ opacity: 0, translateY: -50 }}
               animate={{ opacity: 1, translateY: 0 }}
               transition={{ duration: 1 }}
-              className='text-white mt-32 font-roboto mr-20 font-bold text-center uppercase text-6xl p-'>Buy & Sell Digital Assets In The Coin Hub</motion.h1>
+              className='text-white mt-10 md:mt-32 font-roboto font-bold text-center uppercase text-2xl md:text-6xl p-'>Buy & Sell Digital Assets In The Coin Hub</motion.h1>
               <motion.h2
               initial={{ opacity: 0, translateY: -50 }}
               animate={{ opacity: 1, translateY: 0 }}
               transition={{ duration: 1 }}
-              className='text-gray-300 text-lg font-roboto mt-4 p-1 '
+              className='text-gray-300  text-md md:text-lg font-roboto mt-4 p-1 '
               >
                 The best place to buy and sell crypto. Securely buy, sell, and build your cryptocurrency portfolio. 
               </motion.h2>
@@ -98,7 +99,7 @@ const data =[
               initial={{ opacity: 0, translateY: -50 }}
               animate={{ opacity: 1, translateY: 0 }}
               transition={{ duration: 1 }}
-              className='bg-gradient-to-r from-cyan-500 to-blue-500 hover:shadow-xl duration-200 text-white font-roboto font-bold text-lg p-4 rounded-full mt-8'
+              className='bg-gradient-to-r from-cyan-500 to-blue-500 hover:shadow-xl duration-200 text-white ml-4 md:ml-0 font-roboto font-bold md:text-lg p-2 md:p-4 rounded-full mt-8'
               >
                 Get Started
               </motion.button>
@@ -110,15 +111,17 @@ const data =[
               initial={{ opacity: 0, translateY: -50 }}
               animate={{ opacity: 1, translateY: 0 }}
               transition={{ duration: 1 }}
-              src="https://kriptomat.io/wp-content/uploads/2021/12/blockchain.png" className='pl-10 mt-10' width={600} alt="" />
+              src="https://kriptomat.io/wp-content/uploads/2021/12/blockchain.png" className='mt-10 w-72 ml-7 md:ml-4 md:w-11/12' alt="" />
             </div>
             
           </div>
+          </div>
+          
           <Card></Card>
           <Work></Work>
           <Desc></Desc>
           <div className='bg-gray-800'>
-          <div className='list  container flex flex-wrap pt-20  pb-10'>
+          <div className='list container flex flex-wrap pt-20  pb-10'>
             {data.map((coin, i) => (
               <motion.div 
               ref={ref}
@@ -129,18 +132,17 @@ const data =[
                 hidden: { opacity: 0, y: 100 },
               }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              key={i} className='container p-3 space-x-16 items-center justify-center mx-auto  w-60  pl-16'>
+              key={i} className='container p-3 space-x-16 items-center justify-center mx-auto w-32 md:w-60  md:pl-16'>
                 <a href={coin.link}>
                 <div className='border-2 border-gray-500 p-4 rounded-full'>
                     <div class="relative group">
                     <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-600  blur rounded-full opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
-                    <div class="relative  py-6 items-center bg-white rounded-full ring-1 ring-gray-900/5  leading-none flex items-top justify-start space-x-6">
-                        <div className='items-center mx-auto justify-center pl-6'>
-                        <img className='rounded-full object-scale-down w-16 mx-auto h-20' src={coin.image} alt={coin.name} />
+                    <div class="relative  md:py-6 items-center bg-white rounded-full ring-1 ring-gray-900/5  leading-none flex items-top justify-start space-x-6">
+                        <div className='items-center mx-auto justify-center '>
+                        <img className='rounded-full object-scale-down  md:w-16 mx-auto h-20' src={coin.image} alt={coin.name} />
                         </div>
                         
-                        <div class="space-y-2">
-                        </div>
+                        
                     
                 </div>
                 </div>

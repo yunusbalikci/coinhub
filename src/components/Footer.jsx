@@ -27,7 +27,7 @@ function Footer() {
               }}
               transition={{ duration: 0.5, delay: 0.1 }}
     className='bg-gray-800 pb-4'>
-      <div className='container flex text-white font-roboto mt-2 pt-10 pb-10 justify-between'>
+      <div className='container md:flex text-white font-roboto mt-2 pt-10 pb-10 justify-between'>
         <div className='space-y-4'>
             <div className='flex'>
                 <img src={logo} className='w-16' alt="" />
@@ -37,19 +37,19 @@ function Footer() {
             <h3 className='text-gray-300'>+12 345 6789</h3>
             <h3 className='text-gray-300'>coinhub@example.com</h3>
         </div>
-        <div className='space-y-2'>
+        <div className='space-y-2 mt-4 md:mt-0'>
             <h1 className='font-bold text-lg'>Products</h1>
             <h2 className='text-gray-300'>Contact Us!</h2>
             <h3 className='text-gray-300'>+12 345 6789</h3>
             <h3 className='text-gray-300'>coinhub@example.com</h3>
         </div>
-        <div className='space-y-2 text-lg'>
+        <div className='space-y-2 mt-4 md:mt-0 text-lg'>
             <h1 className='font-bold'>Service</h1>
             <h2 className='text-gray-300'>Contact Us!</h2>
             <h3 className='text-gray-300'>+12 345 6789</h3>
             <h3 className='text-gray-300'>coinhub@example.com</h3>
         </div>
-        <div className='space-y-2'>
+        <div className='space-y-2 mt-4 md:mt-0'>
             <h1 className='font-bold text-lg'>About Us</h1>
             <h2 className='text-gray-300'>Contact Us!</h2>
             <h3 className='text-gray-300'>+12 345 6789</h3>
